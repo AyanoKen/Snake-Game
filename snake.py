@@ -70,3 +70,9 @@ class Snake:
                 return True
         
         return False
+    
+    def reset_snake(self):
+        for segment in self.snake:
+            segment.goto(2000, 2000)
+        self.snake.clear()
+        self._create_snake(position=(0, 0))

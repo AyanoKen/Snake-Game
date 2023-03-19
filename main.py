@@ -7,7 +7,7 @@ import time
 WIDTH = 1000
 HEIGHT = 600
 SNAKE_SIZE = 100
-SNAKE_SPEED = 3
+SNAKE_SPEED = 2
 UPDATE_DELAY = 0.005
 
 screen = Screen()
@@ -20,9 +20,11 @@ player = Snake(thickness= SNAKE_SIZE, speed= SNAKE_SPEED)
 food = Food(screen_wid= WIDTH/2, screen_height= HEIGHT/2)
 scoreboard = ScoreBoard(location= (0, HEIGHT/2 - 50))
 
+
 screen.listen()
 screen.onkey(player.turn_left, "Left")
 screen.onkey(player.turn_right, "Right")
+
 
 alive = True
 while alive:
@@ -37,12 +39,15 @@ while alive:
         player.increase_size()
 
     if abs(player.snake[0].xcor()) > WIDTH/2 or abs(player.snake[0].ycor()) > HEIGHT/2:
-        scoreboard.game_over()
-        alive = False
+        # scoreboard.game_over()
+        # alive = False
+        scoreboard.reset_score()
+        player.reset_snake()
 
     if player.tail_collision():
-        scoreboard.game_over()
-        alive = False
-
+        # scoreboard.game_over()
+        # alive = False
+        scoreboard.reset_score()
+        player.reset_snake()
 
 screen.exitonclick()
